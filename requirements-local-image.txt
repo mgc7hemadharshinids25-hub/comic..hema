@@ -1,0 +1,7 @@
+# Optional: use local Stable Diffusion instead of the Hugging Face Inference API.
+-r requirements.txt
+diffusers>=0.35,<1
+transformers>=4.50,<5
+accelerate>=1.0,<2
+safetensors>=0.6,<1
+torch>=2.6

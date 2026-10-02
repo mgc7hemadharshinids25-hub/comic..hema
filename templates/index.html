@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft — AI Comic Creator</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="landing">
+  <main class="container">
+    <section class="hero">
+      <span class="badge">AI COMIC CREATOR</span>
+      <h1>Turn an idea into a comic.</h1>
+      <p>Write your concept, choose the mood and art style, and ComicCraft builds a five-panel story with AI artwork.</p>
+    </section>
+
+    {% if error %}
+      <div class="alert error"><strong>Generation failed:</strong> {{ error }}</div>
+    {% endif %}
+
+    <section class="card form-card">
+      <form method="post" action="/generate" id="comic-form">
+        <label for="story_prompt">Story Prompt</label>
+        <textarea id="story_prompt" name="story_prompt" rows="4" maxlength="2000" required placeholder="A brave fox exploring an enchanted forest..."></textarea>
+
+        <div class="grid two">
+          <div>
+            <label for="character_name">Main Character Name</label>
+            <input id="character_name" name="character_name" required maxlength="100" placeholder="Fenn">
+          </div>
+          <div>
+            <label for="setting">Setting</label>
+            <select id="setting" name="setting">
+              <option>Enchanted forest</option>
+              <option>School</option>
+              <option>Space station</option>
+              <option>Futuristic city</option>
+              <option>Ancient kingdom</option>
+              <option>Custom</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div>
+            <label for="tone">Story Tone</label>
+            <select id="tone" name="tone">
+              <option>Light-hearted</option>
+              <option>Dramatic</option>
+              <option>Poetic</option>
+              <option>Funny</option>
+              <option>Adventurous</option>
+            </select>
+          </div>
+          <div>
+            <label for="art_style">Art Style</label>
+            <select id="art_style" name="art_style">
+              <option>Comic book</option>
+              <option>Anime</option>
+              <option>Pixel art</option>
+              <option>Realistic</option>
+              <option>Watercolor</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="primary" type="submit" id="generate-button">Create My Comic</button>
+        <p class="hint">Generation can take several minutes when image generation is enabled.</p>
+      </form>
+    </section>
+  </main>
+  <script>
+    document.getElementById('comic-form').addEventListener('submit', () => {
+      const button = document.getElementById('generate-button');
+      button.disabled = true;
+      button.textContent = 'Creating your comic…';
+    });
+  </script>
+</body>
+</html>
